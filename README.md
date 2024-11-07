@@ -56,16 +56,16 @@ $png = Sharp::run(
         'toFormat' => ['format' => 'png'], // Required for raw output
         'resize' => ['width' => 300, 'height' => 200]
     ]
-);
+); // Returns a raw PNG binary string
 ```
 
 `is_raw` is a boolean parameter that indicates if the input is a raw data or a file path.
 `$svg` is the raw SVG XML string.
 `ext` is the image format: jpg, png, svg of the source data; it's used as the file extension internally.
 
-File example:
+Example with file paths including filename and extension:
 ```php
-$png = Sharp::run(
+Sharp::run(
     [
         'input' => ['is_raw' => false, 'data' => $svgPath],
         'output' => ['is_raw' => false, 'file' => $pngPath],
