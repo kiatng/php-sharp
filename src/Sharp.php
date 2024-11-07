@@ -49,9 +49,7 @@ class Sharp
             // Check for Sharp.js errors
             $errorOutput = $process->getErrorOutput();
             if ($errorOutput) {
-                // Strip the SHARP_ERROR prefix if present
-                $errorMessage = preg_replace('/^SHARP_ERROR:\s*/', '', $errorOutput);
-                throw new Exception($errorMessage);
+                throw new Exception($errorOutput);
             }
 
             $output = $process->getOutput();
