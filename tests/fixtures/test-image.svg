@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle with Gradient -->
+    <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#777BB3"/>
+            <stop offset="40%" style="stop-color:#00BBCC"/>
+            <stop offset="100%" style="stop-color:#45B93D"/>
+        </linearGradient>
+
+        <linearGradient id="sharpGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF6B6B"/>
+            <stop offset="40%" style="stop-color:#66AA00"/>
+            <stop offset="100%" style="stop-color:#FF3366"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Main Circle -->
+    <circle cx="100" cy="100" r="90" fill="url(#bgGradient)"/>
+
+    <!-- Sharp Symbol (Geometric Representation) -->
+    <path d="M70 60 L130 60 L110 140 L50 140 Z"
+          fill="url(#sharpGradient)"
+          transform="rotate(-25, 90, 110)"/>
+
+    <!-- Overlay Shape -->
+    <path d="M120 60 L150 90 L130 140 L100 110 Z"
+          fill="#55ffff"
+          fill-opacity="0.4"
+          transform="rotate(-8, 100, 100)"/>
+</svg>

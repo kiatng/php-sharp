@@ -1,0 +1,7 @@
+/tests/fixtures/tmp/*
+/node_modules
+/vendor
+create-test-image.php
+package-lock.json
+package.json
+.phpunit.result.cache
