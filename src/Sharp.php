@@ -17,10 +17,11 @@ class Sharp
     /**
      * @param array $io {input: {is_raw: bool, data: string, ?ext: string}, output: {is_raw: bool, ?file: string}}
      * @param array $params {toFormat: {format: string, options: object}, {resize: {width: int, height: int, options: object}}}
+     * @param array $constructorOptions Optional Sharp constructor options (e.g., density, failOn, limitInputPixels)
      * @return string
      * @throws Exception
      */
-    public static function run(array $io, array $params)
+    public static function run(array $io, array $params, array $constructorOptions = [])
     {
         try {
             if ($io['input']['is_raw']) {
@@ -38,7 +39,11 @@ class Sharp
                 $file = $io['input']['data'];
             }
 
-            $process = new Process(['node', __DIR__ . '/sharp.js', $file, json_encode($params)]);
+            $args = ['node', __DIR__ . '/sharp.js', $file, json_encode($params)];
+            if (!empty($constructorOptions)) {
+                $args[] = json_encode($constructorOptions);
+            }
+            $process = new Process($args);
             $process->run();
 
             // Cleanup temporary file

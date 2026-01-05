@@ -111,4 +111,25 @@ class SharpTest extends TestCase
 
         $this->assertFileExists($outputPath);
     }
+
+    public function testCanUseConstructorOptions()
+    {
+        $outputPath = $this->testOutputDir . '/with-density.png';
+
+        $io = [
+            'input' => ['is_raw' => false, 'data' => $this->testSvgFile],
+            'output' => ['is_raw' => false, 'file' => $outputPath]
+        ];
+
+        $params = [
+            'resize' => ['width' => 200, 'height' => 200]
+        ];
+
+        // Use density option to set DPI for SVG rendering
+        $constructorOptions = ['density' => 300];
+
+        Sharp::run($io, $params, $constructorOptions);
+
+        $this->assertFileExists($outputPath);
+    }
 }
