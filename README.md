@@ -77,6 +77,25 @@ Sharp::run(
 );
 ```
 
+Using constructor options (e.g., setting density for SVG/PDF files):
+```php
+Sharp::run(
+    [
+        'input' => [
+            'is_raw' => false,
+            'data' => $svgPath,
+            'options' => ['density' => 300] // Constructor options
+        ],
+        'output' => ['is_raw' => false, 'file' => $pngPath],
+    ],
+    [
+        'toFormat' => ['format' => 'png']
+    ]
+);
+```
+
+The `options` parameter in the input array accepts any valid Sharp constructor options. See the [Sharp constructor documentation](https://sharp.pixelplumbing.com/api-constructor/) for available options.
+
 Refer to the test cases in `tests/Unit/SharpTest.php` for more examples.
 
 ## Contributing

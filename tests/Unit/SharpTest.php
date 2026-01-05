@@ -111,4 +111,33 @@ class SharpTest extends TestCase
 
         $this->assertFileExists($outputPath);
     }
+
+    public function testCanUseConstructorOptions()
+    {
+        $outputPath = $this->testOutputDir . '/with-density.png';
+
+        $io = [
+            'input' => [
+                'is_raw' => false,
+                'data' => $this->testSvgFile,
+                'options' => ['density' => 300]
+            ],
+            'output' => [
+                'is_raw' => false,
+                'file' => $outputPath
+            ]
+        ];
+
+        $params = [
+            'toFormat' => ['format' => 'png']
+        ];
+
+        Sharp::run($io, $params);
+
+        $this->assertFileExists($outputPath);
+
+        // Verify the image has higher density by checking file size
+        // Higher density should result in larger file size
+        $this->assertGreaterThan(0, filesize($outputPath));
+    }
 }

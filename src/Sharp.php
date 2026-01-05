@@ -15,7 +15,7 @@ use Exception;
 class Sharp
 {
     /**
-     * @param array $io {input: {is_raw: bool, data: string, ?ext: string}, output: {is_raw: bool, ?file: string}}
+     * @param array $io {input: {is_raw: bool, data: string, ?ext: string, ?options: object}, output: {is_raw: bool, ?file: string}}
      * @param array $params {toFormat: {format: string, options: object}, {resize: {width: int, height: int, options: object}}}
      * @return string
      * @throws Exception
@@ -38,7 +38,16 @@ class Sharp
                 $file = $io['input']['data'];
             }
 
-            $process = new Process(['node', __DIR__ . '/sharp.js', $file, json_encode($params)]);
+            // Extract constructor options if provided
+            $constructorOptions = isset($io['input']['options']) ? json_encode($io['input']['options']) : null;
+
+            // Build process arguments
+            $processArgs = ['node', __DIR__ . '/sharp.js', $file, json_encode($params)];
+            if ($constructorOptions !== null) {
+                $processArgs[] = $constructorOptions;
+            }
+
+            $process = new Process($processArgs);
             $process->run();
 
             // Cleanup temporary file
