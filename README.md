@@ -35,9 +35,10 @@ This last command will create a `node_modules` directory, `package-lock.json` an
 - Sharp npm package
 
 ## Usage
-There is only one static method `run` in the `Sharp` class. It takes two arguments:
+There is only one static method `run` in the `Sharp` class. It takes three arguments:
 - `$io`: Input and output parameters
 - `$params`: Parameters for the image processing
+- `$constructorOptions` (optional): Sharp constructor options (e.g., `density`, `failOn`, `limitInputPixels`)
 
 Refer to the [Sharp documentation](https://sharp.pixelplumbing.com/) on the specifications of the parameters.
 
@@ -74,6 +75,20 @@ Sharp::run(
         //'toFormat' => ['format' => 'png'], Not required if $pngPath has .png extension
         'resize' => ['width' => 300, 'height' => 200]
     ]
+);
+```
+
+Example with constructor options (e.g., setting DPI for SVG rendering):
+```php
+Sharp::run(
+    [
+        'input' => ['is_raw' => false, 'data' => $svgPath],
+        'output' => ['is_raw' => false, 'file' => $pngPath],
+    ],
+    [
+        'resize' => ['width' => 300, 'height' => 200]
+    ],
+    ['density' => 300] // Set DPI to 300 for higher quality SVG rendering
 );
 ```
 

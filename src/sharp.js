@@ -16,7 +16,7 @@ const sharp = require('sharp');
             throw new Error('Missing required arguments: file and apis');
         }
 
-        const [file, apisJson] = arguments;
+        const [file, apisJson, constructorOptionsJson] = arguments;
 
         // Validate JSON apis
         let apis;
@@ -26,8 +26,18 @@ const sharp = require('sharp');
             throw new Error('Invalid apis JSON format');
         }
 
-        // Initialize sharp with input file
-        let image = sharp(file);
+        // Parse constructor options (optional)
+        let constructorOptions = {};
+        if (constructorOptionsJson) {
+            try {
+                constructorOptions = JSON.parse(constructorOptionsJson);
+            } catch (e) {
+                throw new Error('Invalid constructorOptions JSON format');
+            }
+        }
+
+        // Initialize sharp with input file and optional constructor options
+        let image = sharp(file, constructorOptions);
 
         // Define supported APIs map, see https://sharp.pixelplumbing.com/
         const supportedApis = {
